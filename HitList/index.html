@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Youtube Hitlist Player</title>
+    <link rel="stylesheet" type="text/css" href="hitlist.css"/>
+    <!-- include permitted libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
+  </head>
+  <body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+      <div id="header">
+        CS2003 Web1 Assignment: Youtube hitlist
+      </div>
+      <nav id="searchform">
+        <form>
+          <input type="search" id="query" ng-model="userQuery" placeholder="  Search..."/>
+          <label for="startDate">Start Date:</label>
+          <input type="date" id="startDate" ng-model ="startDate" required/>
+          <label for="endDate">End Date:</label>
+          <input type="date" id="endDate" ng-model="endDate" required/>
+          <label for="selItem">Search in:</label>
+          <select id="select" ng-model="selItem">
+            <option selected value="">All</option>
+            <option value="title:*">Title</option>
+            <option value="description:*">Description</option>
+        </select>
+          <button id="search" class="button" type="submit" ng-click="search()"><span>Search</span></button>
+        </form>
+      </nav>
+      <nav id="videolist">
+      <ol>
+        <li ng-repeat="x in videos" ng-click="playVideo(x)">{{x.title}} <br> <img src={{x.thumbUrl}}></a></li>
+      </ol>
+      </nav>
+      <section id="defaultContent">
+      <h1>Welcome to the CS2003 Youtube Hitlist!</h1>
+      <p>
+      Use the search fields above, then select a video from the list on the left to play it.
+      </p>
+      </section>
+      <section id="video">
+
+        <h1>{{title}}</h1>
+
+        <!-- youtube embed code -->
+        <iframe width="560" height="315" src="" id="iframe" frameborder="0" allowfullscreen></iframe>
+
+        <p id="description">
+        {{description}}<br>
+         Published at: {{publishedDate}}
+        </p>
+      </section>
+    </div>
+
+    <script src="hitlist.js"></script>
+  </body>
+</html>
