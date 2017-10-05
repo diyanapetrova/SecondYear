@@ -1,6 +1,6 @@
-#Finite state automaton interpreter 
+# Finite state automaton interpreter 
 
-##Design 
+## Design 
 I started my practical by roughly defining my classes, their fields and functionalities: 
  - State class - keeps all the mapping from this state to another  
  - FSA class – reads the description, saves the rules into convenient data structures and compute the input 
@@ -18,11 +18,11 @@ My final solution is to use a HashMap for the states in the automaton and anothe
 The problem with the initial state comes from the assumption that all FSA have initial state “1”. I didn’t want to make the program dependent on that so I used a flag to get the first state from the transition table, which I think is better. 
 I read the description file in my FSA class and set it up in the constructor. I use a BufferedReader to read the file line by line and extract the mappings and interpret the behaviour of the FSA.  
  
-##Extension 
+## Extension 
 I added the functionality to compose FSA descriptions by making one machine to “lead into” another. The transition from one machine to another proved to be challenging so I used the following diagram to help me with the implementation.  
-  
+
+![Diagram of FSA transition](fsadiagram.png?raw=true)
+
 The transition from one machine to another happens at an accepting state of the first one. If the following input doesn’t map to the current FSA, then the input stream and the current char need to pass to the next machine. I used the mark() and reset() of the BufferedReader class to implement this transition. I mark the stream every time the current machine ends at an accepting state and reset the stream every time I start a run thought a FSA. The only limitation of this implementation I can think of is that it can’t deal with non-deterministic compositions. For example, if the same input maps from an accepting state of a machine to another state in the same machine as well as from an initial state of the next FSA to a state of the last machine.  
   
 I faced a few problems when trying to make the program work with multiple strings inputs. The program must reset the flags (accepting readyToPass) of a FSA object after finishing computing a certain string to ensure that the machine would work correctly on the next one. 
- 
- 
